@@ -92,8 +92,36 @@ def getSample():
     CDR3=[getCDR3sForCertainClonotype(i) for i in range(PoolSize)]
     CDR3 = [item for sublist in CDR3 for item in sublist]
 
-    sample=list(zip(barcodes,chains,CDR3))
-    sample=[('barcode','chain','cdr3')]+sample
+    num_of_chain=len(chains)
+    IS_CELL=['TRUE']*num_of_chain
+    contig_id = ['CHAR'] * num_of_chain
+    high_confidence = ['TRUE'] * num_of_chain
+    LENGTH = [0] * num_of_chain
+    v_gene = ['CHAR'] * num_of_chain
+    d_gene = ['CHAR'] * num_of_chain
+    c_gene = ['CHAR'] * num_of_chain
+    j_gene = ['CHAR'] * num_of_chain
+    full_length = ['TRUE'] * num_of_chain
+    productive = ['TRUE'] * num_of_chain
+    cdr3_nt = ['CHAR'] * num_of_chain
+    reads = [0] * num_of_chain
+    umis = [15] * num_of_chain
+    raw_clonotype_id = ['CHAR'] * num_of_chain
+    TYPE0 = ['TCR'] * num_of_chain
+    clonotype_tcr = ['CHAR'] * num_of_chain
+    raw_consensus_id = ['CHAR'] * num_of_chain
+    SAMPLE = ['CHAR'] * num_of_chain
+
+
+    sample=list(zip(barcodes,IS_CELL,contig_id,high_confidence,LENGTH,chains,v_gene,d_gene,j_gene,c_gene \
+             ,full_length,productive,CDR3,cdr3_nt, reads, umis, raw_clonotype_id, raw_consensus_id, \
+             TYPE0, clonotype_tcr,SAMPLE))
+
+    names= ( "barcode","is_cell","contig_id","high_confidence","length","chain","v_gene","d_gene","j_gene","c_gene" \
+             ,"full_length","productive","cdr3", "cdr3_nt", "reads", "umis", "raw_clonotype_id", "raw_consensus_id", \
+             "type", "clonotype_tcr","sample")
+    sample = [names] + sample
+
     return sample
 sample=getSample()
 with open("sample.csv", "w", newline="") as f:
