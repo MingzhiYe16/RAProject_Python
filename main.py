@@ -93,7 +93,7 @@ def getSample():
     CDR3 = [item for sublist in CDR3 for item in sublist]
 
     sample=list(zip(barcodes,chains,CDR3))
-    sample=[('barcodes','chains','CDR3')]+sample
+    sample=[('barcode','chain','cdr3')]+sample
     return sample
 sample=getSample()
 with open("sample.csv", "w", newline="") as f:
